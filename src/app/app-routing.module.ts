@@ -1,7 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {ShellService} from "./shell/shell.service";
+import {WeatherComponent} from "./weather/weather.component";
 
-const routes: Routes = [];
+const routes: Routes = [
+  ShellService.childRoutes([
+    { path: '', redirectTo: '/weather', pathMatch: 'full' },
+    { path: 'weather', component: WeatherComponent}
+  ])
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
