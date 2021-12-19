@@ -1,3 +1,1 @@
-<span *ngIf="forecasts != null">
-  <span *ngFor="let forecast of forecasts['forecast']"><br>{{forecast['day']['tempmax']}}</span>
-</span>
+<span *ngFor="let forecast of forecasts"><br>{{forecast.day.tempmax}}</span>
