@@ -24,6 +24,7 @@ export class WeatherComponent implements OnInit {
 
   ngOnInit(): void {
     this.getWeather();
+    this.updateDateMaxAndMinTemp();
   }
 
   getWeather(): void{
@@ -31,24 +32,23 @@ export class WeatherComponent implements OnInit {
       this.forecasts = response.forecast;
       this.max_day = response.forecast.length;
       this.current_forecast = response.forecast[this.current_day];
-      this.current_date = formatDate(response.forecast[this.current_day].date, 'dd.MM.yy', 'en');
-      this.updateMaxAndMinTemp(response.forecast[this.current_day]);
       console.log(this.forecasts);
     });
   }
 
-  updateMaxAndMinTemp(forecast: Forecast): void{
-    let result = this.weatherService.getMaxAndMinTemp(forecast);
-    this.temp_max = result.tempmax;
-    this.temp_min = result.tempmin;
+  updateDateMaxAndMinTemp(): void{
+    this.weatherService.getMaxAndMinTemp(this.current_day).subscribe((response) => {
+      this.temp_max = response.tempmax;
+      this.temp_min = response.tempmin;
+      this.current_date = formatDate(response.date, 'dd.MM.yy', 'en');
+    });
   }
 
   backward(): void {
     if (this.current_day - 1 >= 0) {
       this.current_day -= 1;
       this.current_forecast = this.forecasts[this.current_day];
-      this.current_date = formatDate(this.forecasts[this.current_day].date, 'dd.MM.yy', 'en');
-      this.updateMaxAndMinTemp(this.forecasts[this.current_day]);
+      this.updateDateMaxAndMinTemp();
     }
   }
 
@@ -56,8 +56,7 @@ export class WeatherComponent implements OnInit {
     if (this.current_day + 1 <= this.max_day - 1) {
       this.current_day += 1;
       this.current_forecast = this.forecasts[this.current_day];
-      this.current_date = formatDate(this.forecasts[this.current_day].date, 'dd.MM.yy', 'en');
-      this.updateMaxAndMinTemp(this.forecasts[this.current_day]);
+      this.updateDateMaxAndMinTemp();
     }
   }
 }
