@@ -32,15 +32,14 @@ export class WeatherComponent implements OnInit {
       this.forecasts = response.forecast;
       this.max_day = response.forecast.length;
       this.current_forecast = response.forecast[this.current_day];
-      console.log(this.forecasts);
     });
   }
 
   updateDateMaxAndMinTemp(): void{
     this.weatherService.getMaxAndMinTemp(this.current_day).subscribe((response) => {
+      this.current_date = formatDate(response.date, 'dd.MM.yy', 'en');
       this.temp_max = response.tempmax;
       this.temp_min = response.tempmin;
-      this.current_date = formatDate(response.date, 'dd.MM.yy', 'en');
     });
   }
 

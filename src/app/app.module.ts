@@ -12,6 +12,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { WeatherInfoComponent } from './weather/weather-info/weather-info.component';
 import {WeatherService} from "./weather/weather.service";
 import {MatButtonModule} from "@angular/material/button";
+import { ModalComponent } from './modal/modal.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {ModalModule} from "ngx-bootstrap/modal";
+
 
 @NgModule({
   declarations: [
@@ -19,7 +23,8 @@ import {MatButtonModule} from "@angular/material/button";
     ShellComponent,
     HeaderComponent,
     WeatherComponent,
-    WeatherInfoComponent
+    WeatherInfoComponent,
+    ModalComponent
   ],
     imports: [
         BrowserModule,
@@ -27,7 +32,10 @@ import {MatButtonModule} from "@angular/material/button";
         BrowserAnimationsModule,
         MatToolbarModule,
         HttpClientModule,
-        MatButtonModule
+        MatButtonModule,
+        ModalModule,
+        MatDialogModule,
+
     ],
   providers: [WeatherService],
   bootstrap: [AppComponent]

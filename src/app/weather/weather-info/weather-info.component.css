@@ -20,6 +20,14 @@
   border-radius: 5px;
 }
 
+.col-border:hover {
+  padding: 0.5em;
+  border-style: solid;
+  border-width: 4px;
+  border-color: rgb(116, 142, 255);
+  border-radius: 5px;
+}
+
 .full-width {
   width: 100%;
 }
