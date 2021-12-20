@@ -1,5 +1,5 @@
 export interface MinMaxTemp {
-  date: Date;
+  date: string;
   tempmax: string;
   tempmin: string;
 }

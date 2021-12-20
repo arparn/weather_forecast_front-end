@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {WeatherService} from "./weather.service";
 import {Forecast} from "../models/forecast";
 
-import {formatDate} from "@angular/common";
-
 
 @Component({
   selector: 'app-weather',
@@ -37,7 +35,7 @@ export class WeatherComponent implements OnInit {
 
   updateDateMaxAndMinTemp(): void{
     this.weatherService.getMaxAndMinTemp(this.current_day).subscribe((response) => {
-      this.current_date = formatDate(response.date, 'dd.MM.yy', 'en');
+      this.current_date = response.date;
       this.temp_max = response.tempmax;
       this.temp_min = response.tempmin;
     });

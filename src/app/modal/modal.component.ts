@@ -17,7 +17,7 @@ export class ModalComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: {forecast: Forecast, dayTime: string}) { }
 
   ngOnInit(): void {
-    this.date = formatDate(this.data.forecast.date, 'dd.MM.yyyy', 'en');
+    this.date = formatDate(this.data.forecast.date, 'yyyy.MM.dd', 'en');
     if (this.data.dayTime === 'Day') {
       this.dayTimeData = this.data.forecast.day;
     } else {
