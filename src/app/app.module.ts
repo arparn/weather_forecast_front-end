@@ -9,22 +9,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { WeatherComponent } from './weather/weather.component';
 import { HttpClientModule } from "@angular/common/http";
+import { WeatherInfoComponent } from './weather/weather-info/weather-info.component';
+import {WeatherService} from "./weather/weather.service";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
     AppComponent,
     ShellComponent,
     HeaderComponent,
-    WeatherComponent
+    WeatherComponent,
+    WeatherInfoComponent
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         MatToolbarModule,
-        HttpClientModule
+        HttpClientModule,
+        MatButtonModule
     ],
-  providers: [],
+  providers: [WeatherService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

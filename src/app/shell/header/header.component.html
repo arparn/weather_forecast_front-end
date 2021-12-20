@@ -1,3 +1,10 @@
 <mat-toolbar color="primary">
-  <span> {{ title }} </span>
+  <mat-toolbar-row>
+    <span>{{title}}</span>
+    <span class="date_and_temp">Today {{today_date}}</span>
+    <span *ngIf="today">
+      <span class="date_and_temp">Highest temperature: {{temp_max}}°C</span>
+      <span class="date_and_temp">Lowest temperature: {{temp_min}}°C</span>
+    </span>
+  </mat-toolbar-row>
 </mat-toolbar>

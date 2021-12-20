@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {WeatherService} from "./weather.service";
 import {Forecast} from "../models/forecast";
 
+import {formatDate} from "@angular/common";
+
+
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
@@ -10,6 +13,12 @@ import {Forecast} from "../models/forecast";
 export class WeatherComponent implements OnInit {
 
   forecasts: Forecast[] = [];
+  current_forecast: Forecast;
+  current_date: string = '';
+  current_day: number = 0;
+  max_day: number;
+  temp_max: string = '';
+  temp_min: string = '';
 
   constructor(private weatherService: WeatherService) { }
 
@@ -20,7 +29,35 @@ export class WeatherComponent implements OnInit {
   getWeather(): void{
     this.weatherService.getWeather().subscribe((response) => {
       this.forecasts = response.forecast;
+      this.max_day = response.forecast.length;
+      this.current_forecast = response.forecast[this.current_day];
+      this.current_date = formatDate(response.forecast[this.current_day].date, 'dd.MM.yy', 'en');
+      this.updateMaxAndMinTemp(response.forecast[this.current_day]);
       console.log(this.forecasts);
     });
+  }
+
+  updateMaxAndMinTemp(forecast: Forecast): void{
+    let result = this.weatherService.getMaxAndMinTemp(forecast);
+    this.temp_max = result.tempmax;
+    this.temp_min = result.tempmin;
+  }
+
+  backward(): void {
+    if (this.current_day - 1 >= 0) {
+      this.current_day -= 1;
+      this.current_forecast = this.forecasts[this.current_day];
+      this.current_date = formatDate(this.forecasts[this.current_day].date, 'dd.MM.yy', 'en');
+      this.updateMaxAndMinTemp(this.forecasts[this.current_day]);
+    }
+  }
+
+  forward(): void {
+    if (this.current_day + 1 <= this.max_day - 1) {
+      this.current_day += 1;
+      this.current_forecast = this.forecasts[this.current_day];
+      this.current_date = formatDate(this.forecasts[this.current_day].date, 'dd.MM.yy', 'en');
+      this.updateMaxAndMinTemp(this.forecasts[this.current_day]);
+    }
   }
 }

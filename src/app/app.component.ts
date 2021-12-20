@@ -7,7 +7,7 @@ import {Title} from "@angular/platform-browser";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Weather Forecast';
+  title = 'Weather Forecast°';
 
   constructor(private titleService: Title) {
   }

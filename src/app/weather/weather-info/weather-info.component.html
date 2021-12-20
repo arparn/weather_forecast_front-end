@@ -1,0 +1,26 @@
+<div class="main">
+  <div class="section-from">
+    <div class="container">
+      <div class="row">
+        <div class="col col-lg-6" *ngIf="forecast != null">
+          <div class="col-border">
+            <div class="d-flex flex-row">
+              <h1>Day</h1>
+              <h2 class="temp">{{forecast.day.tempmax}}°C ... {{forecast.day.tempmin}}°C</h2>
+            </div>
+            <h2>{{forecast.day.phenomenon}}</h2>
+          </div>
+        </div>
+        <div class="col col-lg-6" *ngIf="forecast != null">
+          <div class="col-border">
+            <div class="d-flex flex-row">
+              <h1>Night</h1>
+              <h2 class="temp">{{forecast.night.tempmax}}°C ... {{forecast.night.tempmin}}°C</h2>
+            </div>
+            <h2>{{forecast.night.phenomenon}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
