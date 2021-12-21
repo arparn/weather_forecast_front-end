@@ -1,16 +1,27 @@
 <div class="main">
-  <div class="container">
-    <div class="row">
-      <div class="button-container">
-        <button mat-stroked-button class="btn btn-outline-primary" (click)="backward()"><</button>
-        <h2>Highest temperature: {{temp_max}}°C</h2>
-        <h2>{{ current_date }}</h2>
-        <h2>Lowest temperature: {{temp_min}}°C</h2>
-        <button mat-stroked-button class="btn btn-outline-primary" (click)="forward()">></button>
+  <div class="section-from">
+    <div class="container">
+      <div class="row">
+        <mat-card-actions class="button-container">
+          <button mat-stroked-button class="btn btn-outline-primary" (click)="backward()"><</button>
+          <h2>Highest temperature: {{temp_max}}°C</h2>
+
+          <mat-form-field appearance="legacy" class="form-select-lg">
+            <mat-label>Select date</mat-label>
+            <mat-select [(ngModel)]="current_forecast">
+              <mat-option *ngFor="let forecast of forecasts" [value]="forecast" (click)="select()">
+                {{forecast.date}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <h2>Lowest temperature: {{temp_min}}°C</h2>
+          <button mat-stroked-button class="btn btn-outline-primary" (click)="forward()">></button>
+        </mat-card-actions>
       </div>
     </div>
+    <app-weather-info [forecast]="current_forecast" ></app-weather-info>
+    <app-places *ngIf="current_forecast != null && current_forecast.day.place != null" [forecast]="current_forecast"></app-places>
   </div>
 </div>
-
-<app-weather-info [forecast]="current_forecast" ></app-weather-info>
 

@@ -4,5 +4,5 @@ import {Day} from "./day";
 export interface Forecast {
   night: Night;
   day:   Day;
-  date: Date;
+  date: string;
 }

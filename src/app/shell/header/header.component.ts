@@ -9,7 +9,7 @@ import {formatDate} from "@angular/common";
 })
 export class HeaderComponent implements OnInit {
 
-  today_date = formatDate(new Date(), 'yyyy.MM.dd', 'en');
+  today_date = formatDate(new Date(), 'dd.MM.yyyy', 'en');
 
   constructor(private titleService: Title) { }
 

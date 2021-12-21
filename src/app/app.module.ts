@@ -15,6 +15,14 @@ import {MatButtonModule} from "@angular/material/button";
 import { ModalComponent } from './modal/modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {ModalModule} from "ngx-bootstrap/modal";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
+import {MatInputModule} from "@angular/material/input";
+import {FormsModule} from "@angular/forms";
+import { PlacesComponent } from './weather/places/places.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
@@ -24,19 +32,26 @@ import {ModalModule} from "ngx-bootstrap/modal";
     HeaderComponent,
     WeatherComponent,
     WeatherInfoComponent,
-    ModalComponent
+    ModalComponent,
+    PlacesComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        HttpClientModule,
-        MatButtonModule,
-        ModalModule,
-        MatDialogModule,
-
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    HttpClientModule,
+    MatButtonModule,
+    ModalModule,
+    MatDialogModule,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatTableModule,
+    MatSlideToggleModule,
+    MatCardModule
+  ],
   providers: [WeatherService],
   bootstrap: [AppComponent]
 })

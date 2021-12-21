@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {WeatherService} from "./weather.service";
 import {Forecast} from "../models/forecast";
+import {formatDate} from "@angular/common";
 
 
 @Component({
@@ -15,30 +16,39 @@ export class WeatherComponent implements OnInit {
   current_date: string = '';
   current_day: number = 0;
   max_day: number;
-  temp_max: string = '';
-  temp_min: string = '';
+  temp_max: string;
+  temp_min: string;
 
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit(): void {
     this.getWeather();
-    this.updateDateMaxAndMinTemp();
   }
 
   getWeather(): void{
     this.weatherService.getWeather().subscribe((response) => {
+      for (let forecast of response.forecast) {
+        forecast.date = formatDate(forecast.date, 'dd.MM.yyyy', 'en');
+      }
       this.forecasts = response.forecast;
-      this.max_day = response.forecast.length;
       this.current_forecast = response.forecast[this.current_day];
+      this.max_day = response.forecast.length;
+      this.updateDateMaxAndMinTemp();
+      console.log(this.forecasts);
     });
   }
 
   updateDateMaxAndMinTemp(): void{
-    this.weatherService.getMaxAndMinTemp(this.current_day).subscribe((response) => {
-      this.current_date = response.date;
-      this.temp_max = response.tempmax;
-      this.temp_min = response.tempmin;
-    });
+    if (parseInt(this.current_forecast.day.tempmax) >= parseInt(this.current_forecast.night.tempmax)) {
+      this.temp_max = this.current_forecast.day.tempmax;
+    } else {
+      this.temp_max = this.current_forecast.night.tempmax;
+    }
+    if (parseInt(this.current_forecast.night.tempmin) <= parseInt(this.current_forecast.day.tempmin)) {
+      this.temp_min = this.current_forecast.night.tempmin;
+    } else {
+      this.temp_min = this.current_forecast.day.tempmin;
+    }
   }
 
   backward(): void {
@@ -55,5 +65,10 @@ export class WeatherComponent implements OnInit {
       this.current_forecast = this.forecasts[this.current_day];
       this.updateDateMaxAndMinTemp();
     }
+  }
+
+  select(): void {
+    this.current_day = this.forecasts.indexOf(this.current_forecast);
+    this.updateDateMaxAndMinTemp();
   }
 }
