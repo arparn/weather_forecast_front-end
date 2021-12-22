@@ -1,9 +1,12 @@
 <div class="main">
-  <div class="section-from">
+  <div *ngIf="isOk; else error">
     <div class="container">
       <div class="row">
         <mat-card-actions class="button-container">
-          <button mat-stroked-button class="btn btn-outline-primary" (click)="backward()"><</button>
+          <button *ngIf="current_day != 0; else first" mat-stroked-button class="btn btn-outline-primary" (click)="backward()"><</button>
+          <ng-template #first>
+            <button mat-stroked-button disabled class="btn btn-outline-primary"><</button>
+          </ng-template>
           <h2>Highest temperature: {{temp_max}}°C</h2>
 
           <mat-form-field appearance="legacy" class="form-select-lg">
@@ -16,12 +19,24 @@
           </mat-form-field>
 
           <h2>Lowest temperature: {{temp_min}}°C</h2>
-          <button mat-stroked-button class="btn btn-outline-primary" (click)="forward()">></button>
+          <button *ngIf="current_day != max_day - 1; else last" mat-stroked-button class="btn btn-outline-primary" (click)="forward()">></button>
+          <ng-template #last>
+            <button mat-stroked-button disabled class="btn btn-outline-primary">></button>
+          </ng-template>
         </mat-card-actions>
       </div>
     </div>
     <app-weather-info [forecast]="current_forecast" ></app-weather-info>
     <app-places *ngIf="current_forecast != null && current_forecast.day.place != null" [forecast]="current_forecast"></app-places>
   </div>
+  <ng-template #error>
+    <div class="section-form">
+      <div class="container">
+        <mat-card-title>
+          <h1>Oops, an error occurred!</h1>
+        </mat-card-title>
+      </div>
+    </div>
+  </ng-template>
 </div>
 

@@ -21,7 +21,6 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import { PlacesComponent } from './weather/places/places.component';
 import {MatTableModule} from "@angular/material/table";
-import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatCardModule} from "@angular/material/card";
 
 
@@ -49,7 +48,6 @@ import {MatCardModule} from "@angular/material/card";
     MatFormFieldModule,
     FormsModule,
     MatTableModule,
-    MatSlideToggleModule,
     MatCardModule
   ],
   providers: [WeatherService],
