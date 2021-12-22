@@ -6,21 +6,21 @@ This project is implemented on TypeScript using Angular framework version 13.1.2
 
 For styling, I used Angular Material and Bootstrap.
 
-## Development server
+### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Build
+### Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Back-end
+### Back-end
 Back-end part of this project can be found here:
 [Weather Forecast Back-end](https://github.com/arparn/weather_forecast)
 
 # User guide
 
-## Functionality
+### Functionality
 
 - At the top of the web page user can select date (1) or use arrows (2)
 to change the weather forecasts.
